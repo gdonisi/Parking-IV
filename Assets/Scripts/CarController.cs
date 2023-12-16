@@ -14,8 +14,11 @@ public class Car : MonoBehaviour
     {
         movingSpeed = 20f;
         rotationSpeed = 85f;
-        originalPos = new Vector3(gameObject.transform.position.x, gameObject.transform.position.y, gameObject.transform.position.z);
-        originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y, gameObject.transform.rotation.z, gameObject.transform.rotation.w);
+
+        originalPos = new Vector3(gameObject.transform.position.x,
+            gameObject.transform.position.y, gameObject.transform.position.z);
+        originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y,
+            gameObject.transform.rotation.z, gameObject.transform.rotation.w);
     }
 
     // Update is called once per frame
@@ -23,12 +26,12 @@ public class Car : MonoBehaviour
     {
         // pressione dei tasti W, S, o frecce avanti e dietro
         float translation = Input.GetAxis("Vertical") * movingSpeed;
-        // pressione dei tasti A, D, o frecce destra e sinistra
         float rotation = 0f;
 
         // Evita la rotazione se l'auto sta ferma
         if (translation != 0)
         {
+            // pressione dei tasti A, D, o frecce sinistra e destra
             rotation = Input.GetAxis("Horizontal") * rotationSpeed;
 
             // Se si sta facendo retromarcia, inverti i tasti A e D
@@ -37,6 +40,7 @@ public class Car : MonoBehaviour
                 rotation *= -1;
             }
         }
+
         if (Input.GetKeyDown(KeyCode.E))
         {
             transform.position = originalPos;
