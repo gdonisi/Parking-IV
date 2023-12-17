@@ -23,7 +23,7 @@ public class CarAgent : Agent
         {
             SetReward(1f);
         }
-        if (other.TryGetComponent<Hit>(out Hit hit))
+        if (other.TryGetComponent<Crash>(out Crash crash))
         {
             SetReward(-1f);
         }
