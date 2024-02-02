@@ -17,7 +17,7 @@ public class CarAgent : Agent
 
         transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 1f;
 
-        AddReward(0.001f);
+        AddReward(0.0001f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -25,7 +25,7 @@ public class CarAgent : Agent
 
         if(other.TryGetComponent<Goal>(out Goal goal))
         {
-            SetReward(1f);
+            SetReward(2f);
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
