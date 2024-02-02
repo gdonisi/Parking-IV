@@ -9,23 +9,27 @@ public class CarAgent : Agent
 {
     [SerializeField] private Transform targetTransform;
 
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
-        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 1f; 
+        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 1f;
+
+        AddReward(0.001f);
     }
 
     private void OnTriggerEnter(Collider other)
     {
+
         if(other.TryGetComponent<Goal>(out Goal goal))
         {
             SetReward(1f);
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
-            SetReward(-1f);
+            SetReward(-2f);
         }
         EndEpisode();
     }
@@ -45,7 +49,7 @@ public class CarAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(70, 0, -70);
+        transform.localPosition = new Vector3(66, 0, 19);
         transform.localRotation = new Quaternion(0, 0, 0, 0);
     }
 }
