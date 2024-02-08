@@ -56,7 +56,7 @@ public class CarController : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Respawn"))
+        if (collision.gameObject.CompareTag("Respawn") || collision.gameObject.CompareTag("Crash") || collision.gameObject.CompareTag("Goal"))
         {
             transform.position = originalPos;
             transform.rotation = originalRot;

@@ -8,6 +8,14 @@ using Unity.MLAgents.Sensors;
 public class CarAgent : Agent
 {
     [SerializeField] private Transform targetTransform;
+    private Vector3 initialPosition;
+    private Quaternion initialRot;
+
+    private void Start()
+    {
+        initialPosition = transform.position;
+        initialRot = transform.rotation;
+    }
 
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -15,7 +23,7 @@ public class CarAgent : Agent
         float moveX = actions.ContinuousActions[0];
         float moveZ = actions.ContinuousActions[1];
 
-        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 5f;
+        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 20f;
 
         AddReward(0.0001f);
     }
@@ -25,11 +33,11 @@ public class CarAgent : Agent
 
         if(other.TryGetComponent<Goal>(out Goal goal))
         {
-            SetReward(2f);
+            SetReward(5f);
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
-            SetReward(-2f);
+            SetReward(-0.5f);
         }
         EndEpisode();
     }
@@ -49,7 +57,7 @@ public class CarAgent : Agent
 
     public override void OnEpisodeBegin()
     {
-        transform.localPosition = new Vector3(66, 0, 19);
-        transform.localRotation = new Quaternion(0, 0, 0, 0);
+        transform.position = initialPosition;
+        transform.rotation = initialRot;
     }
 }
