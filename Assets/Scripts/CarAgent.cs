@@ -15,6 +15,7 @@ public class CarAgent : Agent
         initialRot = transform.rotation;
     }
 
+
     public override void OnActionReceived(ActionBuffers actions)
     {
         float rotation = actions.ContinuousActions[0];
@@ -27,15 +28,21 @@ public class CarAgent : Agent
 
             if (translation < 0)
             {
-                AddReward(0.0002f);
+                //SetReward(0.0002f);
                 rotation *= -1;
             } else
             {
-                AddReward(0.0001f);
+                SetReward(0.0001f);
             }
 
             transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
+
+            float distance = Vector3.Distance(transform.position, targetTransform.position);
+            if (distance < 20)
+                SetReward(0.0005f);
+
+            Debug.Log("distanza: " + distance);
         }
     }
     
@@ -48,7 +55,7 @@ public class CarAgent : Agent
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
-            SetReward(-1f);
+            SetReward(-0.5f);
         }
         EndEpisode();
     }
