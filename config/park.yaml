@@ -22,11 +22,11 @@ behaviors:
         strength: 0.99
       gail:
         strength: 0.3
-        demo_path: Demos/demo2.demo
+        demo_path: Demos/demo1.demo
         use_actions: false
 
     behavioral_cloning: 
-      demo_path: Demos/demo2.demo
+      demo_path: Demos/demo1.demo
       steps: 750000
       strength: 0.4
 
@@ -59,11 +59,11 @@ behaviors:
         strength: 0.99
       gail:
         strength: 0.3
-        demo_path: Demos/demo2.demo
+        demo_path: Demos/demo1.demo
         use_actions: false
 
     behavioral_cloning: 
-      demo_path: Demos/demo2.demo
+      demo_path: Demos/demo1.demo
       steps: 300000
       strength: 0.3
 
