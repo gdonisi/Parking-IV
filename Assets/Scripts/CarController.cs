@@ -15,15 +15,14 @@ public class CarController : MonoBehaviour
         movingSpeed = 20f;
         rotationSpeed = 85f;
 
-        originalPos = new Vector3(gameObject.transform.position.x,
-            gameObject.transform.position.y, gameObject.transform.position.z);
-        originalRot = new Quaternion(gameObject.transform.rotation.x, gameObject.transform.rotation.y,
-            gameObject.transform.rotation.z, gameObject.transform.rotation.w);
+        originalPos = gameObject.transform.position;
+        originalRot = gameObject.transform.rotation;
     }
 
     // Update is called once per frame
     void Update()
     {
+        /*
         // pressione dei tasti W, S, o frecce avanti e dietro
         float translation = Input.GetAxis("Vertical") * movingSpeed;
         float rotation = 0f;
@@ -52,15 +51,22 @@ public class CarController : MonoBehaviour
 
         transform.Translate(0, 0, translation);
         transform.Rotate(0, rotation, 0);
+        */
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Respawn") || collision.gameObject.CompareTag("Crash") || collision.gameObject.CompareTag("Goal"))
+        if (collision.gameObject.CompareTag("Respawn"))
         {
             transform.position = originalPos;
             transform.rotation = originalRot;
         }
             
+    }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        transform.position = originalPos;
+        transform.rotation = originalRot;
     }
 }

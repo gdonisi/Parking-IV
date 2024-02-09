@@ -20,14 +20,26 @@ public class CarAgent : Agent
 
     public override void OnActionReceived(ActionBuffers actions)
     {
-        float moveX = actions.ContinuousActions[0];
-        float moveZ = actions.ContinuousActions[1];
+        float rotation = actions.ContinuousActions[0];
+        float translation = actions.ContinuousActions[1];
 
-        transform.localPosition += new Vector3(moveX, 0, moveZ) * Time.deltaTime * 20f;
+        if(translation != 0)
+        {
+            translation *= Time.deltaTime * 20f;
+            rotation *= Time.deltaTime * 85f;
 
-        AddReward(0.0001f);
+            if (translation < 0)
+            {
+                rotation *= -1;
+            }
+
+            transform.Translate(0, 0, translation);
+            transform.Rotate(0, rotation, 0);
+        }
+
+        //AddReward(0.0001f);
     }
-
+    
     private void OnTriggerEnter(Collider other)
     {
 
@@ -41,7 +53,7 @@ public class CarAgent : Agent
         }
         EndEpisode();
     }
-
+    
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
