@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class CarController : MonoBehaviour
@@ -9,7 +7,6 @@ public class CarController : MonoBehaviour
     private Vector3 originalPos;
     private Quaternion originalRot;
 
-    // Start is called before the first frame update
     void Start()
     {
         movingSpeed = 20f;
@@ -19,10 +16,9 @@ public class CarController : MonoBehaviour
         originalRot = gameObject.transform.rotation;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        /*
+        /* Boh
         // pressione dei tasti W, S, o frecce avanti e dietro
         float translation = Input.GetAxis("Vertical") * movingSpeed;
         float rotation = 0f;
