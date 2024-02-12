@@ -8,6 +8,10 @@ public class CarAgent : Agent
     [SerializeField] private Transform targetTransform;
     private Vector3 initialPosition;
     private Quaternion initialRot;
+    [SerializeField] private Material winMaterial;
+    [SerializeField] private Material loseMaterial;
+    [SerializeField] private MeshRenderer floorMeshRenderer;
+
 
     private void Start()
     {
@@ -15,6 +19,16 @@ public class CarAgent : Agent
         initialRot = transform.rotation;
     }
 
+    public override void OnEpisodeBegin()
+    {
+        //posizione statica dell'auto
+        //transform.position = initialPosition;
+
+        //Posizione randomica dell'auto
+       transform.position = new Vector3(Random.Range(initialPosition.x -12f, initialPosition.x +8f),0, Random.Range(initialPosition.z -40f,initialPosition.z));
+
+        transform.rotation = initialRot;
+    }
 
     public override void OnActionReceived(ActionBuffers actions)
     {
@@ -30,19 +44,16 @@ public class CarAgent : Agent
             {
                 //SetReward(0.0002f);
                 rotation *= -1;
-            } else
-            {
-                SetReward(0.0001f);
-            }
+            } 
 
             transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
 
-            float distance = Vector3.Distance(transform.position, targetTransform.position);
+          /*  float distance = Vector3.Distance(transform.position, targetTransform.position);
             if (distance < 20)
-                SetReward(0.0005f);
+                AddReward(0.05f); */
 
-            Debug.Log("distanza: " + distance);
+           // Debug.Log("distanza: " + distance);
         }
     }
     
@@ -51,13 +62,16 @@ public class CarAgent : Agent
 
         if(other.TryGetComponent<Goal>(out Goal goal))
         {
-            SetReward(5f);
+            SetReward(+1f);
+            floorMeshRenderer.material = winMaterial;
+            EndEpisode();
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
-            SetReward(-0.5f);
+            SetReward(-1f);
+            floorMeshRenderer.material = loseMaterial;
+            EndEpisode();
         }
-        EndEpisode();
     }
     
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -73,9 +87,5 @@ public class CarAgent : Agent
         sensor.AddObservation(targetTransform.localPosition);
     }
 
-    public override void OnEpisodeBegin()
-    {
-        transform.position = initialPosition;
-        transform.rotation = initialRot;
-    }
+   
 }
