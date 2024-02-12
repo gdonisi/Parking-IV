@@ -2,32 +2,44 @@ using UnityEngine;
 using Unity.MLAgents;
 using Unity.MLAgents.Actuators;
 using Unity.MLAgents.Sensors;
+using System.Collections.Generic;
 
 public class CarAgent : Agent
 {
+    private Vector3 carInitialPosition;
+    private Quaternion carInitialRotation;
+    private List<Vector3> spawnList = new List<Vector3>();
     [SerializeField] private Transform targetTransform;
-    private Vector3 initialPosition;
-    private Quaternion initialRot;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
     [SerializeField] private MeshRenderer floorMeshRenderer;
 
-
     private void Start()
     {
-        initialPosition = transform.position;
-        initialRot = transform.rotation;
+        carInitialPosition = transform.position;
+        carInitialRotation = transform.rotation;
+
+        spawnList.Add(new Vector3(-20.5f, 2.5f, 12f)); // lasciare come primo elemento della lista
+        spawnList.Add(new Vector3(2.5f, 2.5f, 0.5f));
+        spawnList.Add(new Vector3(-45f, 2.5f, -10f));
     }
 
     public override void OnEpisodeBegin()
     {
         //posizione statica dell'auto
         //transform.position = initialPosition;
+      
+        // Posizione casuale di auto e parcheggio
+        transform.position = new Vector3(Random.Range(carInitialPosition.x -12f, carInitialPosition.x +8f),
+           0, Random.Range(carInitialPosition.z -40f,carInitialPosition.z));
+        transform.rotation = carInitialRotation;
 
-        //Posizione randomica dell'auto
-       transform.position = new Vector3(Random.Range(initialPosition.x -12f, initialPosition.x +8f),0, Random.Range(initialPosition.z -40f,initialPosition.z));
-
-        transform.rotation = initialRot;
+        int index = Random.Range(0, spawnList.Count);
+        if (index == 0)
+            targetTransform.rotation = Quaternion.Euler(0, 90, 90);
+        else
+            targetTransform.rotation = Quaternion.Euler(0, 0, 90);
+        targetTransform.localPosition = spawnList[index];
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -56,7 +68,7 @@ public class CarAgent : Agent
            // Debug.Log("distanza: " + distance);
         }
     }
-    
+
     private void OnTriggerEnter(Collider other)
     {
 
@@ -73,7 +85,7 @@ public class CarAgent : Agent
             EndEpisode();
         }
     }
-    
+
     public override void Heuristic(in ActionBuffers actionsOut)
     {
         ActionSegment<float> continuousActions = actionsOut.ContinuousActions;
@@ -85,7 +97,6 @@ public class CarAgent : Agent
     {
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(targetTransform.localPosition);
+        //sensor.AddObservation(Vector3.Distance(transform.localPosition, targetTransform.localPosition));
     }
-
-   
 }
