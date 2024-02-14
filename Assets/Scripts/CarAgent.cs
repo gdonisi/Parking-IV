@@ -24,14 +24,15 @@ public class CarAgent : Agent
         spawnList.Add(new Vector3(-45f, 2.5f, -10f));
     }
 
+   
     public override void OnEpisodeBegin()
     {
         //posizione statica dell'auto
-        //transform.position = initialPosition;
-      
+        transform.position = carInitialPosition;
+
         // Posizione casuale di auto e parcheggio
-        transform.position = new Vector3(Random.Range(carInitialPosition.x -12f, carInitialPosition.x +8f),
-           0, Random.Range(carInitialPosition.z -40f,carInitialPosition.z));
+        /* transform.position = new Vector3(Random.Range(carInitialPosition.x -12f, carInitialPosition.x +8f),
+            0, Random.Range(carInitialPosition.z -40f,carInitialPosition.z));*/
         transform.rotation = carInitialRotation;
 
         int index = Random.Range(0, spawnList.Count);
@@ -47,26 +48,39 @@ public class CarAgent : Agent
         float rotation = actions.ContinuousActions[0];
         float translation = actions.ContinuousActions[1];
 
-        if(translation != 0)
+        if (transform.position.y < -4.99)
+            EndEpisode();
+
+        if (translation != 0)
         {
             translation *= Time.deltaTime * 20f;
-            rotation *= Time.deltaTime * 85f;
+            rotation *= Time.deltaTime * 180f;
 
             if (translation < 0)
             {
-                //SetReward(0.0002f);
+                AddReward(+0.01f);
                 rotation *= -1;
-            } 
+            }
 
             transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
 
-          /*  float distance = Vector3.Distance(transform.position, targetTransform.position);
-            if (distance < 20)
-                AddReward(0.05f); */
+            float distance = Vector3.Distance(transform.position, targetTransform.position);
 
-           // Debug.Log("distanza: " + distance);
+            /*if (distance < 45)
+                AddReward(0.002f);
+            else if (distance < 20)
+                AddReward(0.005f); */
+
+            //Debug.Log("distanza: " + distance);
+            if (this.StepCount == 999)
+                AddReward(-11f);
+
+            else if (this.StepCount == 600)
+                AddReward(-5f);
         }
+        else
+            AddReward(-0.01f);
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,16 +88,26 @@ public class CarAgent : Agent
 
         if(other.TryGetComponent<Goal>(out Goal goal))
         {
-            SetReward(+1f);
+            AddReward(+3f);
             floorMeshRenderer.material = winMaterial;
             EndEpisode();
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
-            SetReward(-1f);
+            AddReward(-3f);
             floorMeshRenderer.material = loseMaterial;
             EndEpisode();
         }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("carCrash"))
+        {
+            AddReward(-2f);
+            floorMeshRenderer.material = loseMaterial;
+        }
+
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
@@ -99,4 +123,6 @@ public class CarAgent : Agent
         sensor.AddObservation(targetTransform.localPosition);
         //sensor.AddObservation(Vector3.Distance(transform.localPosition, targetTransform.localPosition));
     }
+
+    
 }
