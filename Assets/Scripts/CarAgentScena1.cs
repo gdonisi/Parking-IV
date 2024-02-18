@@ -11,6 +11,7 @@ public class CarAgentScena1 : Agent
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
     [SerializeField] private MeshRenderer floorMeshRenderer;
+    public bool randomPos = false;
 
     private void Start()
     {
@@ -20,8 +21,11 @@ public class CarAgentScena1 : Agent
 
     public override void OnEpisodeBegin()
     {
-        //posizione statica dell'auto
-        transform.position = carInitialPosition;
+        if (randomPos)
+            transform.position = new Vector3(Random.Range(carInitialPosition.x - 5f, carInitialPosition.x + 7f),
+            0, Random.Range(carInitialPosition.z - 30f, carInitialPosition.z));
+        else
+            transform.position = carInitialPosition;
         transform.rotation = carInitialRotation;
     }
 

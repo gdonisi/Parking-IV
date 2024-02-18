@@ -8,34 +8,26 @@ public class CarAgentScena3 : Agent
 {
     private Vector3 carInitialPosition;
     private Quaternion carInitialRotation;
-    private List<Vector3> spawnList = new List<Vector3>();
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
     [SerializeField] private MeshRenderer floorMeshRenderer;
-    public Transform parkIndicator;
+    public bool randomPos = false;
 
     private void Start()
     {
         carInitialPosition = transform.position;
         carInitialRotation = transform.rotation;
-
-        spawnList.Add(new Vector3(4f, 2.5f, 0f));
-        spawnList.Add(new Vector3(-46f, 2.5f, -10.5f));
     }
 
     public override void OnEpisodeBegin()
     {
-        //posizione statica dell'auto
+        if (randomPos)
+            transform.position = new Vector3(Random.Range(carInitialPosition.x - 5f, carInitialPosition.x + 7f),
+            0, Random.Range(carInitialPosition.z - 30f, carInitialPosition.z));
+        else
         transform.position = carInitialPosition;
         transform.rotation = carInitialRotation;
-
-        int index = Random.Range(0, spawnList.Count);
-        targetTransform.localPosition = spawnList[index];
-        if (index == 0)
-            parkIndicator.position = new Vector3(91.5f, 0.5f, 98.2f);
-        else
-            parkIndicator.position = new Vector3(50, 0.5f, 88.1f);
     }
 
     public override void OnActionReceived(ActionBuffers actions)
@@ -53,12 +45,27 @@ public class CarAgentScena3 : Agent
 
             if (translation < 0)
             {
-                AddReward(+0.01f);
+                //AddReward(+0.05f);
                 rotation *= -1;
+            } else
+            {
+                //translation = 0;
+                //rotation = 0;
+                AddReward(-0.2f);
             }
 
             transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
+
+            /*
+            float distance = Vector3.Distance(transform.position, targetTransform.position);
+            if (distance < 45)
+                AddReward(0.002f);
+            else if (distance < 20)
+                AddReward(0.005f);
+
+            Debug.Log("distanza: " + distance);
+            */
 
             if (this.StepCount == 999)
                 AddReward(-11f);
@@ -108,6 +115,7 @@ public class CarAgentScena3 : Agent
     {
         sensor.AddObservation(transform.localPosition);
         sensor.AddObservation(targetTransform.localPosition);
+        //sensor.AddObservation(Vector3.Distance(transform.localPosition, targetTransform.localPosition));
     }
 
 }

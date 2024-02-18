@@ -1886,6 +1886,7 @@ MonoBehaviour:
   winMaterial: {fileID: 2100000, guid: 4d88e3e9bd13edf47b33033f63dd0d1b, type: 2}
   loseMaterial: {fileID: 2100000, guid: 88dc811446135334e9fd9b5c1df720c6, type: 2}
   floorMeshRenderer: {fileID: 1230258421}
+  randomPos: 1
 --- !u!1 &1594125952 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 100000, guid: a1eb827aa0413ab4a8b3b08c0e1a8c56, type: 3}

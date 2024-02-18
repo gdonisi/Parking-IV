@@ -4192,7 +4192,7 @@ GameObject:
   - component: {fileID: 2769960041987224742}
   - component: {fileID: 5699225003977197229}
   - component: {fileID: 9024641773299988036}
-  - component: {fileID: 6516864633177866931}
+  - component: {fileID: 7977089903200786462}
   - component: {fileID: 7599908430814971726}
   - component: {fileID: 637264955195437685}
   - component: {fileID: 1804372892594015373}
@@ -4211,8 +4211,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3076440314603473397}
   serializedVersion: 2
-  m_LocalRotation: {x: -0, y: -0.0024422063, z: -0, w: 0.999997}
-  m_LocalPosition: {x: -20.2, y: 0.045167208, z: -40.2}
+  m_LocalRotation: {x: 0, y: 1, z: 0, w: 0}
+  m_LocalPosition: {x: -20.2, y: 0.045167208, z: -24}
   m_LocalScale: {x: 0.9, y: 0.9, z: 0.9}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -4241,7 +4241,7 @@ Transform:
   - {fileID: 5124463438037649182}
   - {fileID: 704932147819553764}
   m_Father: {fileID: 8167596147533276239}
-  m_LocalEulerAnglesHint: {x: 0, y: -0.28, z: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
 --- !u!65 &2769960041987224742
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -4312,16 +4312,16 @@ MonoBehaviour:
     VectorActionDescriptions: []
     VectorActionSpaceType: 1
     hasUpgradedBrainParametersWithActionSpec: 1
-  m_Model: {fileID: 5022602860645237092, guid: 05f23e919c4d65741b904fd68910daf6, type: 3}
+  m_Model: {fileID: 5022602860645237092, guid: a3a28a80035af4922b8842a1d270695f, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 2
+  m_BehaviorType: 0
   m_BehaviorName: CarBehavior
   TeamId: 0
   m_UseChildSensors: 1
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &6516864633177866931
+--- !u!114 &7977089903200786462
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4330,13 +4330,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3076440314603473397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cf9127c19621a4b4482f37863341249e, type: 3}
+  m_Script: {fileID: 11500000, guid: 60b040fc98f174864a2227803ce0073d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 0
+  MaxStep: 1000
   targetTransform: {fileID: 8538749857802405771}
   winMaterial: {fileID: 2100000, guid: 4d88e3e9bd13edf47b33033f63dd0d1b, type: 2}
   loseMaterial: {fileID: 2100000, guid: 88dc811446135334e9fd9b5c1df720c6, type: 2}
@@ -6163,7 +6163,7 @@ GameObject:
   m_Component:
   - component: {fileID: 8167596147533276239}
   m_Layer: 0
-  m_Name: Training 2 (2)
+  m_Name: scena3prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
