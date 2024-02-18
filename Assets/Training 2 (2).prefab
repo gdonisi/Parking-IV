@@ -4192,7 +4192,7 @@ GameObject:
   - component: {fileID: 2769960041987224742}
   - component: {fileID: 5699225003977197229}
   - component: {fileID: 9024641773299988036}
-  - component: {fileID: 1150078745133463049}
+  - component: {fileID: 6516864633177866931}
   - component: {fileID: 7599908430814971726}
   - component: {fileID: 637264955195437685}
   - component: {fileID: 1804372892594015373}
@@ -4321,7 +4321,7 @@ MonoBehaviour:
   m_UseChildActuators: 1
   m_DeterministicInference: 0
   m_ObservableAttributeHandling: 0
---- !u!114 &1150078745133463049
+--- !u!114 &6516864633177866931
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -4330,13 +4330,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3076440314603473397}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fdf07789cac3e405a9cac109c83ab852, type: 3}
+  m_Script: {fileID: 11500000, guid: cf9127c19621a4b4482f37863341249e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   agentParameters:
     maxStep: 0
   hasUpgradedFromAgentParameters: 1
-  MaxStep: 1000
+  MaxStep: 0
   targetTransform: {fileID: 8538749857802405771}
   winMaterial: {fileID: 2100000, guid: 4d88e3e9bd13edf47b33033f63dd0d1b, type: 2}
   loseMaterial: {fileID: 2100000, guid: 88dc811446135334e9fd9b5c1df720c6, type: 2}
@@ -6771,7 +6771,7 @@ Transform:
   m_GameObject: {fileID: 5008475551267566326}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0.7071068, z: 0, w: 0.7071068}
-  m_LocalPosition: {x: -40.2, y: -0.029781103, z: -30.3}
+  m_LocalPosition: {x: -40.2, y: -0.029781103, z: -20.8}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:

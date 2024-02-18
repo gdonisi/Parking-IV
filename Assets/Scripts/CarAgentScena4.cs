@@ -26,12 +26,9 @@ public class CarAgentScena4 : Agent
 
     public override void OnEpisodeBegin()
     {
-        //posizione statica dell'auto
-        transform.position = carInitialPosition;
-
         // Posizione casuale di auto e parcheggio
-        /* transform.position = new Vector3(Random.Range(carInitialPosition.x -12f, carInitialPosition.x +8f),
-            0, Random.Range(carInitialPosition.z -40f,carInitialPosition.z));*/
+        transform.position = new Vector3(Random.Range(carInitialPosition.x -12f, carInitialPosition.x +8f),
+            0, Random.Range(carInitialPosition.z -40f,carInitialPosition.z));
         transform.rotation = carInitialRotation;
 
         int index = Random.Range(0, spawnList.Count);

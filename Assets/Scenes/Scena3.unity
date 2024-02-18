@@ -1604,7 +1604,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4743435864104500209, guid: c65c350d55d6af940a2eaa9e984fcddd, type: 3}
       propertyPath: m_Name
-      value: Scena2
+      value: Scena3
       objectReference: {fileID: 0}
     - target: {fileID: 4743435864104500209, guid: c65c350d55d6af940a2eaa9e984fcddd, type: 3}
       propertyPath: m_IsActive
@@ -1692,6 +1692,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 1150078745133463049, guid: c65c350d55d6af940a2eaa9e984fcddd, type: 3}
+    - {fileID: 6516864633177866931, guid: c65c350d55d6af940a2eaa9e984fcddd, type: 3}
     m_RemovedGameObjects:
     - {fileID: 6956238341735259792, guid: c65c350d55d6af940a2eaa9e984fcddd, type: 3}
     m_AddedGameObjects: []
