@@ -36,8 +36,8 @@ public class CarAgentScena5 : Agent
 
         if (translation != 0)
         {
-            translation *= Time.deltaTime * 15f;
-            rotation *= Time.deltaTime * 180f;
+            translation *= Time.deltaTime * 12f;
+            rotation *= Time.deltaTime * 140f;
 
             if (translation < 0)
             {
@@ -48,15 +48,8 @@ public class CarAgentScena5 : Agent
             transform.Translate(0, 0, translation);
             transform.Rotate(0, rotation, 0);
 
-            /*
-            float distance = Vector3.Distance(transform.position, targetTransform.position);
-            if (distance < 45)
-                AddReward(0.002f);
-            else if (distance < 20)
-                AddReward(0.005f);
-
-            Debug.Log("distanza: " + distance);
-            */
+            //Debug.Log("distanza: " + distance);
+            
 
             if (this.StepCount == 999)
                 AddReward(-11f);
