@@ -11,13 +11,17 @@ public class CarAgentScena3 : Agent
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
-    [SerializeField] private MeshRenderer floorMeshRenderer;
+    public Animator policeAnimation;
+    public AudioSource policeAudio;
     public bool randomPos = false;
 
     private void Start()
     {
         carInitialPosition = transform.position;
         carInitialRotation = transform.rotation;
+
+        policeAnimation.enabled = false;
+        policeAudio.enabled = false;
     }
 
     public override void OnEpisodeBegin()
@@ -41,7 +45,7 @@ public class CarAgentScena3 : Agent
         if (translation != 0)
         {
             translation *= Time.deltaTime * 20f;
-            rotation *= Time.deltaTime * 180f;
+            rotation *= Time.deltaTime * 50f;
 
             if (translation < 0)
             {
@@ -83,13 +87,15 @@ public class CarAgentScena3 : Agent
         if (other.TryGetComponent<Goal>(out Goal goal))
         {
             AddReward(+3f);
-            floorMeshRenderer.material = winMaterial;
+            policeAnimation.enabled = false;
+            policeAudio.enabled = false;
             EndEpisode();
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
             AddReward(-3f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
             EndEpisode();
         }
     }
@@ -99,7 +105,8 @@ public class CarAgentScena3 : Agent
         if (collision.gameObject.CompareTag("carCrash"))
         {
             AddReward(-2f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
         }
 
     }

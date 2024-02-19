@@ -12,13 +12,17 @@ public class CarAgentScena2 : Agent
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
-    [SerializeField] private MeshRenderer floorMeshRenderer;
+    public Animator policeAnimation;
+    public AudioSource policeAudio;
     public Transform parkIndicator;
 
     private void Start()
     {
         carInitialPosition = transform.position;
         carInitialRotation = transform.rotation;
+
+        policeAnimation.enabled = false;
+        policeAudio.enabled = false;
 
         spawnList.Add(new Vector3(-20.5f, 2.5f, 12f)); // lasciare come primo elemento della lista
         spawnList.Add(new Vector3(4f, 2.5f, 0f));
@@ -86,13 +90,15 @@ public class CarAgentScena2 : Agent
         if (other.TryGetComponent<Goal>(out Goal goal))
         {
             AddReward(+3f);
-            floorMeshRenderer.material = winMaterial;
+            policeAnimation.enabled = false;
+            policeAudio.enabled = false;
             EndEpisode();
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
             AddReward(-3f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
             EndEpisode();
         }
     }
@@ -102,7 +108,8 @@ public class CarAgentScena2 : Agent
         if (collision.gameObject.CompareTag("carCrash"))
         {
             AddReward(-2f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
         }
 
     }

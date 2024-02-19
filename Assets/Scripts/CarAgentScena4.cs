@@ -12,13 +12,17 @@ public class CarAgentScena4 : Agent
     [SerializeField] private Transform targetTransform;
     [SerializeField] private Material winMaterial;
     [SerializeField] private Material loseMaterial;
-    [SerializeField] private MeshRenderer floorMeshRenderer;
-    //public Transform parkIndicator;
+    public Animator policeAnimation;
+    public AudioSource policeAudio;
+    public Transform parkIndicator;
 
     private void Start()
     {
         carInitialPosition = transform.position;
         carInitialRotation = transform.rotation;
+
+        policeAnimation.enabled = false;
+        policeAudio.enabled = false;
 
         spawnList.Add(new Vector3(-20.5f, 2.5f, 12f)); // lasciare come primo elemento della lista
         spawnList.Add(new Vector3(4f, 2.5f, 0f));
@@ -34,17 +38,17 @@ public class CarAgentScena4 : Agent
         targetTransform.localPosition = spawnList[index];
         if (index == 0)
         {
-            //parkIndicator.position = new Vector3(70f, 0.5f, 108f);
+            parkIndicator.position = new Vector3(70f, 0.5f, 108f);
             targetTransform.rotation = Quaternion.Euler(0, 90, 90);
         }
         else if (index == 1)
         {
-            //parkIndicator.position = new Vector3(91.5f, 0.5f, 98.2f);
+            parkIndicator.position = new Vector3(91.5f, 0.5f, 98.2f);
             targetTransform.rotation = Quaternion.Euler(0, 0, 90);
         }
         else
         {
-            //parkIndicator.position = new Vector3(50, 0.5f, 88.1f);
+            parkIndicator.position = new Vector3(50, 0.5f, 88.1f);
         }
     }
 
@@ -101,13 +105,15 @@ public class CarAgentScena4 : Agent
         if (other.TryGetComponent<Goal>(out Goal goal))
         {
             AddReward(+3f);
-            floorMeshRenderer.material = winMaterial;
+            policeAnimation.enabled = false;
+            policeAudio.enabled = false;
             EndEpisode();
         }
         if (other.TryGetComponent<Crash>(out Crash crash))
         {
             AddReward(-3f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
             EndEpisode();
         }
     }
@@ -117,7 +123,8 @@ public class CarAgentScena4 : Agent
         if (collision.gameObject.CompareTag("carCrash"))
         {
             AddReward(-2f);
-            floorMeshRenderer.material = loseMaterial;
+            policeAnimation.enabled = true;
+            policeAudio.enabled = true;
         }
 
     }
