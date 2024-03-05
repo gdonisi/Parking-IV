@@ -62,8 +62,8 @@ public class CarAgentScena2 : Agent
 
         if (translation != 0)
         {
-            translation *= Time.deltaTime * 20f;
-            rotation *= Time.deltaTime * 180f;
+            translation *= Time.deltaTime * 22f;
+            rotation *= Time.deltaTime * 185f;
 
             if (translation < 0)
             {
