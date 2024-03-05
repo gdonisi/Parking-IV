@@ -49,12 +49,10 @@ public class CarAgentScena3 : Agent
 
             if (translation < 0)
             {
-                //AddReward(+0.05f);
+                AddReward(+0.05f);
                 rotation *= -1;
             } else
             {
-                //translation = 0;
-                //rotation = 0;
                 AddReward(-0.2f);
             }
 

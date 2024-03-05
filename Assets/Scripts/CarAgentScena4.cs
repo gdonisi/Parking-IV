@@ -71,8 +71,6 @@ public class CarAgentScena4 : Agent
                 rotation *= -1;
             } else
             {
-                //translation = 0;
-                //rotation = 0;
                 AddReward(-0.2f);
             }
 
@@ -126,7 +124,6 @@ public class CarAgentScena4 : Agent
             policeAnimation.enabled = true;
             policeAudio.enabled = true;
         }
-
     }
 
     public override void Heuristic(in ActionBuffers actionsOut)
