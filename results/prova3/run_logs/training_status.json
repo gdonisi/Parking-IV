@@ -1,0 +1,29 @@
+{
+    "CarBehavior": {
+        "checkpoints": [
+            {
+                "steps": 78182,
+                "file_path": "results\\prova3\\CarBehavior\\CarBehavior-78182.onnx",
+                "reward": null,
+                "creation_time": 1709816480.4777782,
+                "auxillary_file_paths": [
+                    "results\\prova3\\CarBehavior\\CarBehavior-78182.pt"
+                ]
+            }
+        ],
+        "final_checkpoint": {
+            "steps": 78182,
+            "file_path": "results\\prova3\\CarBehavior.onnx",
+            "reward": null,
+            "creation_time": 1709816480.4777782,
+            "auxillary_file_paths": [
+                "results\\prova3\\CarBehavior\\CarBehavior-78182.pt"
+            ]
+        }
+    },
+    "metadata": {
+        "stats_format_version": "0.3.0",
+        "mlagents_version": "1.0.0",
+        "torch_version": "1.13.1+cu117"
+    }
+}
