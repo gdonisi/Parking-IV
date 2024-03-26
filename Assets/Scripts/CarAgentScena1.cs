@@ -13,6 +13,8 @@ public class CarAgentScena1 : Agent
     public bool randomPos = false;
     public Animator policeAnimation;
     public AudioSource policeAudio;
+    public AudioSource exp;
+    public ParticleSystem explosionEffect;
 
     private void Start()
     {
@@ -80,7 +82,6 @@ public class CarAgentScena1 : Agent
             AddReward(-3f);
             policeAnimation.enabled = true;
             policeAudio.enabled = true;
-            EndEpisode();
         }
     }
 
@@ -88,9 +89,10 @@ public class CarAgentScena1 : Agent
     {
         if (collision.gameObject.CompareTag("carCrash"))
         {
-            AddReward(-2f);
-            policeAnimation.enabled = true;
-            policeAudio.enabled = true;
+            explosionEffect.Play();
+            exp.Play();
+            Destroy(collision.gameObject);
+            Destroy(this.gameObject);
         }
 
     }

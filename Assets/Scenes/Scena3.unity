@@ -2839,7 +2839,7 @@ MonoBehaviour:
   loseMaterial: {fileID: 2100000, guid: 88dc811446135334e9fd9b5c1df720c6, type: 2}
   policeAnimation: {fileID: 1467723285}
   policeAudio: {fileID: 1467723286}
-  randomPos: 0
+  randomPos: 1
 --- !u!1001 &763400152
 PrefabInstance:
   m_ObjectHideFlags: 0
